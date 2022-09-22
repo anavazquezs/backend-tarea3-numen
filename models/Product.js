@@ -11,7 +11,7 @@ El esquema tiene que ser de una farmacia y tiene que cumplir con los siguientes 
 const ProductSchema = new Schema({
     code: {
         type: String,
-        require: true,
+        required: true,
     },
     name: {
         type: String,
@@ -30,6 +30,7 @@ const ProductSchema = new Schema({
     },
     in_stock: {
         type: Boolean,
+        required: true,
     },
     price: {
         type: Number,
