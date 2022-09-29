@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const controllers = require('../controller/controllers');
-const { check, validationResult, body } = require('express-validator');
+const { check } = require('express-validator');
 const { validateId } = require('../middlewares/validateId');
 
 /* Get products listening */
@@ -15,6 +15,7 @@ El proyecto debe contar con dos rutas:
 
 router.get('/view', controllers.productsView);
 router.get('/view/:id', validateId, controllers.viewOneProduct);
+
 
 router.post('/create', [
     check('code').not().isEmpty().withMessage('It must be required a product code').isLength({max: 15, min: 5}).withMessage('The code must be between 5 and 15 characters'),

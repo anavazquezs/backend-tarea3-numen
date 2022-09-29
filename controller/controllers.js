@@ -2,6 +2,7 @@ const controllers = {};
 
 const { validationResult } = require('express-validator');
 const Product = require('../models/Product');
+const axios = require('axios');
 
 controllers.myIndex = (req, res) => {
     res.render('index', { title: 'Pharmacy app' });
@@ -65,5 +66,23 @@ controllers.deleteProduct = async (req, res) => {
         res.status(400).json({msg: 'Can not delete the product', err});
     };
 };
+
+controllers.consultAxiosDitto = async (req, res) => {
+    try {
+        const resp = await axios.get("https://pokeapi.co/api/v2/pokemon/ditto");
+        res.json({status: resp.status, respuesta: resp.data});
+    } catch (error) {
+        res.json({status: error.response.status, data: error.response.data});
+    };
+};
+
+controllers.consultaAxiosByName = async (req, res) => {
+    try {
+        const resp = await axios.get("https://pokeapi.co/api/v2/pokemon/" + req.params.name);
+        res.json({status: resp.status, respuesta: resp.data});
+    } catch (error) {
+        res.json({status: error.response.status, data: error.response.data});
+    }
+}
 
 module.exports = controllers;
